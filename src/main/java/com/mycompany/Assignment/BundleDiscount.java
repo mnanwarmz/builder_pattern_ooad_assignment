@@ -5,9 +5,11 @@ package com.mycompany.Assignment;
  */
 public class BundleDiscount implements Discount {
 	private float discount;
+	private String discountName;
 
-	BundleDiscount(float discount) {
+	BundleDiscount(float discount, String discountName) {
 		this.discount = discount;
+		this.discountName = discountName;
 	}
 
 	@Override
@@ -19,4 +21,7 @@ public class BundleDiscount implements Discount {
 		return discount;
 	}
 
+	public void setDiscountName(String discountName) {
+		this.discountName = discountName;
+	}
 }

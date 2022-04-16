@@ -40,8 +40,6 @@ public class Bundle {
 	public void addFood(Food food) throws Exception {
 		if (foods.contains(food)) {
 			throw new Exception("Food already in bundle");
-		} else if (foods.size() == quantity) {
-			throw new Exception("Bundle is already full");
 		} else {
 			foods.add(food);
 		}
@@ -60,8 +58,6 @@ public class Bundle {
 	public void addDrink(Drink drink) throws Exception {
 		if (drinks.contains(drink)) {
 			throw new Exception("Drink already in bundle");
-		} else if (drinks.size() == quantity) {
-			throw new Exception("Bundle is already full");
 		} else if (!(drink instanceof Drink)) {
 			throw new Exception("Drink is not a drink");
 		} else {
@@ -130,5 +126,9 @@ public class Bundle {
 		} else {
 			return discount;
 		}
+	}
+
+	public void addDiscount(BundleDiscount discount) {
+		this.discount = discount;
 	}
 }
