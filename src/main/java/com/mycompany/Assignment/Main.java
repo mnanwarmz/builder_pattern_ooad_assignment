@@ -5,21 +5,21 @@ public class Main {
 	// Builder Design Pattern
 	public static void main(String[] args) throws Exception {
 		// List of Drinks
-		Drink coke = new Drink("Coke", 1.5f, 10);
-		Drink sprite = new Drink("Sprite", 1.5f, 10);
-		Drink fanta = new Drink("Fanta", 1.5f, 10);
-		Drink sevenUp = new Drink("7Up", 1.5f, 10);
+		Drink coke = new Drink("Coke", 1.5f);
+		Drink sprite = new Drink("Sprite", 1.5f);
+		Drink fanta = new Drink("Fanta", 1.5f);
+		Drink sevenUp = new Drink("7Up", 1.5f);
 
 		// List of Foods
-		Food burger = new Food("Burger", 5.0f, 10);
-		Food pizza = new Food("Pizza", 5.0f, 10);
-		Food pasta = new Food("Pasta", 5.0f, 10);
-		Food soup = new Food("Soup", 5.0f, 10);
+		Food burger = new Food("Burger", 5.0f);
+		Food pizza = new Food("Pizza", 5.0f);
+		Food pasta = new Food("Pasta", 5.0f);
+		Food soup = new Food("Soup", 5.0f);
 
 		// List of Bundles
-		Bundle bundle1 = new Bundle("Bundle 1", 0.0f, 10);
-		Bundle bundle2 = new Bundle("Bundle 2", 0.0f, 10);
-		Bundle bundle3 = new Bundle("Bundle 3", 0.0f, 10);
+		Bundle bundle1 = new Bundle("Bundle 1", 20.0f);
+		Bundle bundle2 = new Bundle("Bundle 2", 18.0f);
+		Bundle bundle3 = new Bundle("Bundle 3", 25.0f);
 
 		// Bundle Discounts
 		BundleDiscount ten = new BundleDiscount(0.1f, "10% off");

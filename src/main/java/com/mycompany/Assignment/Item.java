@@ -9,14 +9,16 @@ abstract class Item {
 	protected int quantity;
 	protected ItemDiscount discount;
 
-	public Item(String name, float price, int quantity) {
+	public Item(String name, float price) {
 		this.name = name;
 		this.price = price;
-		this.quantity = quantity;
 	}
 
 	public float getPrice() {
-		return price;
+		if (discount != null)
+			return price - discount.getDiscount();
+		else
+			return price;
 	}
 
 	public void setPrice(float price) {

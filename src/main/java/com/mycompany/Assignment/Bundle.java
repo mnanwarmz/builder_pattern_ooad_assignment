@@ -20,10 +20,10 @@ public class Bundle {
 	 * @param price
 	 * @param quantity
 	 */
-	public Bundle(String name, float price, int quantity) {
+	public Bundle(String name, float price) {
 		this.name = name;
 		this.price = price;
-		this.quantity = quantity;
+		this.discount = new BundleDiscount(0, "");
 		this.foods = new ArrayList<Food>();
 		this.drinks = new ArrayList<Drink>();
 	}
@@ -89,13 +89,12 @@ public class Bundle {
 	 *                   if bundle has discount but no price
 	 */
 	public float getPrice() throws Exception {
-		if (foods.size() == 0 && drinks.size() == 0) {
+		if (foods.size() == 0 && drinks.size() == 0)
 			throw new Exception("Bundle is empty");
-		} else if (discount.getDiscount() == 0) {
+		if (discount.getDiscount() == 0)
 			throw new Exception("Bundle has discount but no price");
-		} else {
-			return price - discount.getDiscount();
-		}
+		return (price * (1 - discount.getDiscount() / 100));
+
 	}
 
 	/**
@@ -117,15 +116,13 @@ public class Bundle {
 	 *                   if bundle has discount but no price
 	 */
 	public BundleDiscount getDiscount() throws Exception {
-		if (foods.size() == 0 && drinks.size() == 0) {
+		if (foods.size() == 0 && drinks.size() == 0)
 			throw new Exception("Bundle is empty");
-		} else if (discount.getDiscount() == 0) {
+		if (discount.getDiscount() == 0)
 			throw new Exception("Bundle has no discount");
-		} else if (discount.getDiscount() == 0) {
+		if (discount.getDiscount() == 0)
 			throw new Exception("Bundle has discount but no price");
-		} else {
-			return discount;
-		}
+		return discount;
 	}
 
 	public void addDiscount(BundleDiscount discount) {
