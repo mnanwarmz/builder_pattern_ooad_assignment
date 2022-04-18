@@ -1,4 +1,4 @@
-package com.mycompany.Assignment;
+package restaurant2;
 
 /**
  * BundleDiscount
@@ -13,15 +13,22 @@ public class BundleDiscount implements Discount {
 	}
 
 	@Override
-	public void setDiscount(float discount) {
-		this.discount = discount;
-	}
-
 	public float getDiscount() {
 		return discount;
 	}
 
-	public void setDiscountName(String discountName) {
-		this.discountName = discountName;
+	@Override
+	public void setDiscount(float discount) {
+		this.discount = discount;
+	}
+
+	@Override
+	public String getName() {
+		return discountName;
+	}
+
+	@Override
+	public void setName(String name) {
+		this.discountName = name;
 	}
 }

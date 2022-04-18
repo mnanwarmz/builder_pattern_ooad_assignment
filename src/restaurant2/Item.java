@@ -1,4 +1,6 @@
-package com.mycompany.Assignment;
+package restaurant2;
+
+import javax.swing.JLabel;
 
 /**
  * Item
@@ -8,10 +10,12 @@ abstract class Item {
 	protected float price;
 	protected int quantity;
 	protected ItemDiscount discount;
+	protected JLabel nameLabel;
 
 	public Item(String name, float price) {
 		this.name = name;
 		this.price = price;
+		nameLabel = new JLabel(name);
 	}
 
 	public float getPrice() {
@@ -19,6 +23,10 @@ abstract class Item {
 			return price - discount.getDiscount();
 		else
 			return price;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public void setPrice(float price) {

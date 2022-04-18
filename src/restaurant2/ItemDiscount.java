@@ -1,4 +1,4 @@
-package com.mycompany.Assignment;
+package restaurant2;
 
 /**
  * ItemDiscount
@@ -6,9 +6,11 @@ package com.mycompany.Assignment;
 public class ItemDiscount implements Discount {
 
 	private float discount;
+	private String name;
 
-	ItemDiscount(float discount) {
+	ItemDiscount(float discount, String name) {
 		this.discount = discount;
+		this.name = name;
 	}
 
 	@Override
@@ -16,7 +18,18 @@ public class ItemDiscount implements Discount {
 		this.discount = discount;
 	}
 
+	@Override
 	public float getDiscount() {
 		return discount;
+	}
+
+	@Override
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public String getName() {
+		return name;
 	}
 }

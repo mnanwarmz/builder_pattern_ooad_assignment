@@ -1,4 +1,4 @@
-package com.mycompany.Assignment;
+package restaurant2;
 
 import java.util.ArrayList;
 
@@ -18,7 +18,6 @@ public class Bundle {
 	 *
 	 * @param name
 	 * @param price
-	 * @param quantity
 	 */
 	public Bundle(String name, float price) {
 		this.name = name;

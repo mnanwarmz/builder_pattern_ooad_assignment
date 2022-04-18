@@ -1,4 +1,4 @@
-package com.mycompany.Assignment;
+package restaurant2;
 
 /**
  * Food
