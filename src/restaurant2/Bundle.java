@@ -71,12 +71,8 @@ public class Bundle {
 	 * @throws Exception
 	 *                   if bundle is empty
 	 */
-	public String getName() throws Exception {
-		if (foods.size() == 0 && drinks.size() == 0) {
-			throw new Exception("Bundle is empty");
-		} else {
-			return name;
-		}
+	public String getName() {
+		return name;
 	}
 
 	/**
@@ -87,11 +83,7 @@ public class Bundle {
 	 *                   if bundle is empty
 	 *                   if bundle has discount but no price
 	 */
-	public float getPrice() throws Exception {
-		if (foods.size() == 0 && drinks.size() == 0)
-			throw new Exception("Bundle is empty");
-		if (discount.getDiscount() == 0)
-			throw new Exception("Bundle has discount but no price");
+	public float getPrice() {
 		return (price * (1 - discount.getDiscount() / 100));
 
 	}

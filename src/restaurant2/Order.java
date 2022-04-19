@@ -9,9 +9,9 @@ public class Order {
 
 	private float price;
 	private TotalDiscount discount;
-	private ArrayList<Food> foods;
-	private ArrayList<Bundle> bundles;
-	private ArrayList<Drink> drinks;
+	private ArrayList<Food> foods = new ArrayList<Food>();
+	private ArrayList<Bundle> bundles = new ArrayList<Bundle>();
+	private ArrayList<Drink> drinks = new ArrayList<Drink>();
 
 	/**
 	 * Add food to order cart
@@ -21,12 +21,8 @@ public class Order {
 	 * @throws Exception
 	 *                   if food is already in order cart
 	 */
-	public void addFood(Food food) throws Exception {
-		if (foods.contains(food)) {
-			throw new Exception("Food already in order cart");
-		} else {
-			foods.add(food);
-		}
+	public void addFood(Food food) {
+		foods.add(food);
 	}
 
 	/**
@@ -37,12 +33,8 @@ public class Order {
 	 * @throws Exception
 	 *                   if bundle is already in order cart
 	 */
-	public void addBundle(Bundle bundle) throws Exception {
-		if (bundles.contains(bundle)) {
-			throw new Exception("Bundle already in order cart");
-		} else {
-			bundles.add(bundle);
-		}
+	public void addBundle(Bundle bundle) {
+		bundles.add(bundle);
 	}
 
 	public boolean isEmpty() {

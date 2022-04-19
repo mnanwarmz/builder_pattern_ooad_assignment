@@ -1,5 +1,6 @@
 package restaurant2;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -29,9 +30,12 @@ public class OrderPage extends JFrame {
 
 	private JPanel itemsPanel = new JPanel();
 	private JPanel foodsPanel = new JPanel();
-	private JPanel foodButtonsPanel = new JPanel();
 	private JPanel drinksPanel = new JPanel();
 	private JPanel bundlesPanel = new JPanel();
+
+	private JPanel foodButtonsPanel = new JPanel();
+	private JPanel drinksButtonsPanel = new JPanel();
+	private JPanel bundlesButtonsPanel = new JPanel();
 
 	private JPanel cartPanel = new JPanel();
 	private JPanel infoPanel = new JPanel();
@@ -56,38 +60,27 @@ public class OrderPage extends JFrame {
 		mainPanel.add(rightPanel, BorderLayout.EAST);
 		leftPanel.add(itemsPanel);
 		rightPanel.add(infoPanel, BorderLayout.SOUTH);
-		rightPanel.add(cartPanel, BorderLayout.NORTH);
+		rightPanel.add(cartPanel, BorderLayout.CENTER);
 
 		// Items Panel
 		itemsPanel.setLayout(new GridLayout(1, 3));
-		// Foods
-		foodContent();
-		// Drinks
-		JLabel drinksLabel = new JLabel("Drinks");
-		drinksLabel.setFont(new Font("Verdana", Font.BOLD, 20));
-
-		// Bundles
-		JLabel bundlesLabel = new JLabel("Bundles");
-		bundlesLabel.setFont(new Font("Verdana", Font.BOLD, 20));
-
-		// Cart Panel
-		itemsPanel.add(foodsPanel);
-		itemsPanel.add(drinksPanel);
-		itemsPanel.add(bundlesPanel);
-
+		itemsPanel.add(foodsContent());
+		itemsPanel.add(drinksContent());
+		itemsPanel.add(bundlesContent());
+		cartPanel = cartContent();
 	}
 
-	private JPanel foodContent() {
+	private JPanel foodsContent() {
 		JLabel foodsLabel = new JLabel("Foods");
 		foodsLabel.setFont(new Font("Verdana", Font.BOLD, 20));
 		foodsPanel.setLayout(new BorderLayout());
-		foodButtonsPanel.setLayout(new FlowLayout());
+		foodButtonsPanel.setLayout(new BoxLayout(foodButtonsPanel, BoxLayout.Y_AXIS));
 		foodsPanel.add(foodsLabel, BorderLayout.NORTH);
 		foodsPanel.add(foodButtonsPanel, BorderLayout.CENTER);
 		for (Food food : menu.getFoods()) {
 			String formattedPrice = String.format("%.2f", food.getPrice());
 			String foodName = food.getName();
-			JButton foodBtn = new JButton(foodName + "RM" + formattedPrice);
+			JButton foodBtn = new JButton(foodName + " RM" + formattedPrice);
 			foodBtn.setPreferredSize(new Dimension(200, 50));
 			foodBtn.setBackground(new Color(22, 160, 133));
 			foodButtonsPanel.add(foodBtn);
@@ -95,6 +88,7 @@ public class OrderPage extends JFrame {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					try {
+						System.out.println(food);
 						order.addFood(food);
 					} catch (Exception ex) {
 						System.out.println(ex.getMessage());
@@ -103,5 +97,92 @@ public class OrderPage extends JFrame {
 			});
 		}
 		return foodsPanel;
+	}
+
+	private JPanel drinksContent() {
+		JLabel drinksLabel = new JLabel("Drinks");
+		drinksLabel.setFont(new Font("Verdana", Font.BOLD, 20));
+		drinksPanel.setLayout(new BorderLayout());
+		drinksButtonsPanel.setLayout(new BoxLayout(drinksButtonsPanel, BoxLayout.Y_AXIS));
+		drinksPanel.add(drinksLabel, BorderLayout.NORTH);
+		drinksPanel.add(drinksButtonsPanel, BorderLayout.CENTER);
+		for (Drink drink : menu.getDrinks()) {
+			String formattedPrice = String.format("%.2f", drink.getPrice());
+			String drinkName = drink.getName();
+			JButton drinkBtn = new JButton(drinkName + " RM" + formattedPrice);
+			drinkBtn.setPreferredSize(new Dimension(200, 50));
+			drinkBtn.setBackground(new Color(22, 160, 133));
+			drinksButtonsPanel.add(drinkBtn);
+			drinkBtn.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					try {
+						System.out.println(drink);
+						order.addDrink(drink);
+					} catch (Exception ex) {
+						System.out.println(ex.getMessage());
+					}
+				}
+			});
+		}
+		return drinksPanel;
+	}
+
+	// Bundle Content
+	private JPanel bundlesContent() {
+		JLabel bundlesLabel = new JLabel("Bundles");
+		bundlesLabel.setFont(new Font("Verdana", Font.BOLD, 20));
+		bundlesPanel.setLayout(new BorderLayout());
+		bundlesButtonsPanel.setLayout(new BoxLayout(bundlesButtonsPanel, BoxLayout.Y_AXIS));
+		bundlesPanel.add(bundlesLabel, BorderLayout.NORTH);
+		bundlesPanel.add(bundlesButtonsPanel, BorderLayout.CENTER);
+		for (Bundle bundle : menu.getBundles()) {
+			String formattedPrice = String.format("%.2f", bundle.getPrice());
+			String bundleName = bundle.getName();
+			JButton bundleBtn = new JButton(bundleName + " RM" + formattedPrice);
+			bundleBtn.setPreferredSize(new Dimension(200, 50));
+			bundleBtn.setBackground(new Color(22, 160, 133));
+			bundlesButtonsPanel.add(bundleBtn);
+			bundleBtn.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					try {
+						System.out.println(bundle);
+						order.addBundle(bundle);
+					} catch (Exception ex) {
+						System.out.println(ex.getMessage());
+					}
+				}
+			});
+		}
+		return bundlesPanel;
+	}
+
+	// Show a list of the items that are in the order
+	private JPanel cartContent() {
+		JLabel cartLabel = new JLabel("Cart");
+		cartLabel.setFont(new Font("Verdana", Font.BOLD, 20));
+		JPanel cartList = new JPanel();
+		cartPanel.setLayout(new BorderLayout());
+		cartPanel.add(cartLabel, BorderLayout.NORTH);
+		cartPanel.add(cartList, BorderLayout.CENTER);
+		cartList.setLayout(new BoxLayout(cartList, BoxLayout.Y_AXIS));
+		cartList.setPreferredSize(new Dimension(200, 200));
+		cartList.setBackground(new Color(22, 160, 133));
+		cartList.setForeground(Color.WHITE);
+		cartList.setFont(new Font("Verdana", Font.BOLD, 20));
+		for (Food food : order.getFoods()) {
+			JLabel itemLabel = new JLabel(food.getName());
+			cartList.add(itemLabel);
+		}
+		for (Drink drink : order.getDrinks()) {
+			JLabel itemLabel = new JLabel(drink.getName());
+			cartList.add(itemLabel);
+		}
+		for (Bundle bundle : order.getBundles()) {
+			JLabel itemLabel = new JLabel(bundle.getName());
+			cartList.add(itemLabel);
+		}
+		return cartPanel;
 	}
 }
