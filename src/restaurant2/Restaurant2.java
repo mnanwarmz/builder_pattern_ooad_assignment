@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Restaurant2 extends JFrame implements ActionListener {
@@ -53,7 +54,6 @@ public class Restaurant2 extends JFrame implements ActionListener {
 		add(p2, BorderLayout.CENTER);
 		add(p3, BorderLayout.SOUTH);
 		p2.setLayout(new GridLayout(1, 2));
-
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -62,8 +62,15 @@ public class Restaurant2 extends JFrame implements ActionListener {
 		obj.setSize(500, 500);
 		obj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		// Menu initialization
 		Menu menu = new Menu();
+
+		OrderPage orderPage = new OrderPage(menu);
 	}
 
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == userBtn) {
+
+		}
+	}
 }
