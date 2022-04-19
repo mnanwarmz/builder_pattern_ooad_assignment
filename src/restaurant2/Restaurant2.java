@@ -13,19 +13,23 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Restaurant2 extends JFrame implements ActionListener {
+public class Restaurant2 extends JFrame {
 	// Builder Design Pattern
 	private JLabel header, footer;
 	private JPanel p1, p2, p3;
 	private JButton userBtn, adminBtn;
+	private Menu menu;
 
 	// Window Settings
 	public Restaurant2() {
+		// Labels
 		header = new JLabel("Welcome to the Restaurant");
 		header.setFont(new Font("Verdana", Font.BOLD, 20));
 		footer = new JLabel("Restaurant Sdn. Bhd.");
 		footer.setFont(new Font("Verdana", Font.PLAIN, 10));
+		// End Labels
 
+		// Buttons
 		userBtn = new JButton("Make an order");
 		userBtn.setPreferredSize(new Dimension(130, 50));
 		adminBtn = new JButton("Modify system");
@@ -33,6 +37,7 @@ public class Restaurant2 extends JFrame implements ActionListener {
 
 		userBtn.setBackground(new Color(22, 160, 133));
 		adminBtn.setBackground(new Color(22, 160, 133));
+		// End Buttons
 
 		p1 = new JPanel();
 		p1.setBackground(new Color(22, 160, 133));
@@ -54,6 +59,20 @@ public class Restaurant2 extends JFrame implements ActionListener {
 		add(p2, BorderLayout.CENTER);
 		add(p3, BorderLayout.SOUTH);
 		p2.setLayout(new GridLayout(1, 2));
+
+		userBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					menu = new Menu();
+					OrderPage orderPage = new OrderPage(menu);
+					createFrame(orderPage);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -62,15 +81,11 @@ public class Restaurant2 extends JFrame implements ActionListener {
 		obj.setSize(500, 500);
 		obj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		Menu menu = new Menu();
-
-		OrderPage orderPage = new OrderPage(menu);
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == userBtn) {
-
-		}
+	private void createFrame(JFrame obj) {
+		this.dispose();
+		obj.setSize(800, 600);
+		obj.setVisible(true);
 	}
 }
