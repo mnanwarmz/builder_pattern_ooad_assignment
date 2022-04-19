@@ -78,30 +78,6 @@ public class Menu {
 		bundles.add(bundle);
 	}
 
-	public void addDiscountToFood(Food food, ItemDiscount discount) throws Exception {
-		if (foods.contains(food)) {
-			foods.get(foods.indexOf(food)).addDiscount(discount);
-		} else {
-			throw new Exception("Food not in menu");
-		}
-	}
-
-	public void addDiscountToDrink(Drink drink, ItemDiscount discount) throws Exception {
-		if (drinks.contains(drink)) {
-			drinks.get(drinks.indexOf(drink)).addDiscount(discount);
-		} else {
-			throw new Exception("Drink not in menu");
-		}
-	}
-
-	public void addDiscountToBundle(Bundle bundle, BundleDiscount discount) throws Exception {
-		if (bundles.contains(bundle)) {
-			bundles.get(bundles.indexOf(bundle)).addDiscount(discount);
-		} else {
-			throw new Exception("Bundle not in menu");
-		}
-	}
-
 	public void removeFood(Food food) {
 		foods.remove(food);
 	}

@@ -10,49 +10,49 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
 
-public class Restaurant2 extends JFrame {
+public class Restaurant2 extends JFrame implements ActionListener {
 	// Builder Design Pattern
-	private JLabel lb1;
-	private JPanel p1, p2;
-	private JButton foodsBtn, drinksBtn, bundleBtn;
+	private JLabel header, footer;
+	private JPanel p1, p2, p3;
+	private JButton userBtn, adminBtn;
 
 	// Window Settings
 	public Restaurant2() {
-		lb1 = new JLabel("Welcome to the Restaurant");
-		// lb1.setForeground(Color.WHITE);
-		lb1.setFont(new Font("Verdana", Font.BOLD, 20));
+		header = new JLabel("Welcome to the Restaurant");
+		header.setFont(new Font("Verdana", Font.BOLD, 20));
+		footer = new JLabel("Restaurant Sdn. Bhd.");
+		footer.setFont(new Font("Verdana", Font.PLAIN, 10));
 
-		foodsBtn = new JButton("Foods");
-		foodsBtn.setPreferredSize(new Dimension(130, 100));
-		drinksBtn = new JButton("Drinks");
-		drinksBtn.setPreferredSize(new Dimension(160, 100));
-		bundleBtn = new JButton("Bundles");
-		bundleBtn.setPreferredSize(new Dimension(120, 100));
+		userBtn = new JButton("Make an order");
+		userBtn.setPreferredSize(new Dimension(130, 50));
+		adminBtn = new JButton("Modify system");
+		adminBtn.setPreferredSize(new Dimension(160, 50));
 
-		foodsBtn.setBackground(new Color(22, 160, 133));
-		drinksBtn.setBackground(new Color(22, 160, 133));
-		bundleBtn.setBackground(new Color(22, 160, 133));
-		// foodsBtn.setForeground(Color.WHITE);
-		// drinksBtn.setForeground(Color.WHITE);
-		// bundleBtn.setForeground(Color.WHITE);
+		userBtn.setBackground(new Color(22, 160, 133));
+		adminBtn.setBackground(new Color(22, 160, 133));
 
 		p1 = new JPanel();
 		p1.setBackground(new Color(22, 160, 133));
 
-		p1.add(lb1);
+		p1.add(header);
 
 		p2 = new JPanel();
-		p2.add(foodsBtn);
-		p2.add(drinksBtn);
-		p2.add(bundleBtn);
+		p2.add(userBtn);
+		p2.add(adminBtn);
 		p2.setLocation(10, 10);
 		p2.setBackground(new Color(26, 188, 156));
+
+		p3 = new JPanel();
+		p3.add(footer);
+		p3.setBackground(new Color(26, 188, 156));
 
 		setLayout(new BorderLayout());
 		add(p1, BorderLayout.NORTH);
 		add(p2, BorderLayout.CENTER);
-		p2.setLayout(new GridLayout(1, 3));
+		add(p3, BorderLayout.SOUTH);
+		p2.setLayout(new GridLayout(1, 2));
 
 	}
 
@@ -64,10 +64,6 @@ public class Restaurant2 extends JFrame {
 
 		// Menu initialization
 		Menu menu = new Menu();
-
-		Food testFood = new Food("Test Food", 10.0f);
-
-		ItemDiscount testDiscount = new ItemDiscount(0.1f, "10% off");
-		menu.addDiscountToFood(testFood, testDiscount);
 	}
+
 }
