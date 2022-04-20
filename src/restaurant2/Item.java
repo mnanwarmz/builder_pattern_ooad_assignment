@@ -20,7 +20,7 @@ abstract class Item {
 
 	public float getPrice() {
 		if (discount != null)
-			return (price - discount.getDiscount()) * quantity;
+			return (price - (1 - discount.getDiscount())) * quantity;
 		else
 			return price * quantity;
 	}
