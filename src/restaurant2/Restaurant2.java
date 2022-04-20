@@ -25,7 +25,7 @@ public class Restaurant2 extends JFrame {
 		// Labels
 		header = new JLabel("Welcome to the Restaurant");
 		header.setFont(new Font("Verdana", Font.BOLD, 20));
-		footer = new JLabel("Restaurant Sdn. Bhd.");
+		footer = new JLabel("Anwar Zaid Sdn. Bhd.");
 		footer.setFont(new Font("Verdana", Font.PLAIN, 10));
 		// End Labels
 
@@ -60,6 +60,7 @@ public class Restaurant2 extends JFrame {
 		add(p3, BorderLayout.SOUTH);
 		p2.setLayout(new GridLayout(1, 2));
 
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		userBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

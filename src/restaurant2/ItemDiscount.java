@@ -7,10 +7,12 @@ public class ItemDiscount implements Discount {
 
 	private float discount;
 	private String name;
+	private String coupon;
 
-	ItemDiscount(float discount, String name) {
+	ItemDiscount(float discount, String name, String coupon) {
 		this.discount = discount;
 		this.name = name;
+		this.coupon = coupon;
 	}
 
 	@Override

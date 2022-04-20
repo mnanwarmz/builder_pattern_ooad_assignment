@@ -7,8 +7,9 @@ public class TotalDiscount implements Discount {
 	private float discount;
 	private String name;
 
-	TotalDiscount(float discount) {
+	TotalDiscount(float discount, String name) {
 		this.discount = discount;
+		this.name = name;
 	}
 
 	@Override

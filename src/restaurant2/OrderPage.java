@@ -1,6 +1,8 @@
 package restaurant2;
 
 import javax.swing.Box;
+import javax.swing.BorderFactory;
+import javax.swing.JComboBox;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -39,7 +41,6 @@ public class OrderPage extends JFrame {
 	private JPanel bundlesButtonsPanel = new JPanel();
 
 	private JPanel cartPanel = new JPanel();
-	private JPanel infoPanel = new JPanel();
 	private JPanel footerPanel = new JPanel();
 
 	private Menu menu;
@@ -52,6 +53,7 @@ public class OrderPage extends JFrame {
 		add(headerPanel, BorderLayout.NORTH);
 		add(mainPanel, BorderLayout.CENTER);
 		add(footerPanel, BorderLayout.SOUTH);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Panels Declaration
 		headerPanel.add(header);
@@ -62,16 +64,28 @@ public class OrderPage extends JFrame {
 		leftPanel.add(itemsPanel);
 		rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
 
-		rightPanel.add(cartPanel);
-		rightPanel.add(infoPanel);
-
 		// Items Panel
 		itemsPanel.setLayout(new GridLayout(1, 3));
 		itemsPanel.add(foodsContent());
 		itemsPanel.add(drinksContent());
 		itemsPanel.add(bundlesContent());
 		cartPanel = cartContent();
-		infoPanel = cartContent();
+		footer = new JLabel("Anwar Zaid Sdn. Bhd.");
+		// Assign borders to all panels
+		headerPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		mainPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		leftPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		rightPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		itemsPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		foodsPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		drinksPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		bundlesPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		foodButtonsPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		drinksButtonsPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		bundlesButtonsPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		cartPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		footerPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
 	}
 
 	private JPanel foodsContent() {
@@ -94,8 +108,6 @@ public class OrderPage extends JFrame {
 					try {
 						order.addFood(food);
 						cartPanel.removeAll();
-						infoPanel.removeAll();
-						infoPanel = infoContent();
 						cartPanel = cartContent();
 						rightPanel.add(cartPanel, BorderLayout.CENTER);
 						rightPanel.revalidate();
@@ -131,8 +143,6 @@ public class OrderPage extends JFrame {
 					try {
 						order.addDrink(drink);
 						cartPanel.removeAll();
-						infoPanel.removeAll();
-						infoPanel = infoContent();
 						cartPanel = cartContent();
 						rightPanel.revalidate();
 						rightPanel.repaint();
@@ -168,8 +178,6 @@ public class OrderPage extends JFrame {
 					try {
 						order.addBundle(bundle);
 						cartPanel.removeAll();
-						infoPanel.removeAll();
-						infoPanel = infoContent();
 						cartPanel = cartContent();
 						rightPanel.add(cartPanel);
 						rightPanel.revalidate();
@@ -190,9 +198,9 @@ public class OrderPage extends JFrame {
 		JLabel cartLabel = new JLabel("Cart");
 		cartLabel.setFont(new Font("Verdana", Font.BOLD, 20));
 		JPanel cartListPanel = new JPanel();
-		cartPanel.setLayout(new BorderLayout());
-		cartPanel.add(cartLabel, BorderLayout.NORTH);
-		cartPanel.add(cartListPanel, BorderLayout.CENTER);
+		cartPanel.setLayout(new BoxLayout(cartPanel, BoxLayout.Y_AXIS));
+		cartPanel.add(cartLabel);
+		cartPanel.add(cartListPanel);
 		cartListPanel.setLayout(new BoxLayout(cartListPanel, BoxLayout.Y_AXIS));
 		cartListPanel.setPreferredSize(new Dimension(200, 200));
 		cartListPanel.setFont(new Font("Verdana", Font.BOLD, 20));
@@ -214,30 +222,78 @@ public class OrderPage extends JFrame {
 			itemLabel.setFont(new Font("Verdana", Font.PLAIN, 12));
 			cartListPanel.add(itemLabel);
 		}
-		cartPanel.add(infoContent(), BorderLayout.SOUTH);
+		cartPanel.add(infoContent());
+		cartPanel.add(discountContent());
 		return cartPanel;
 	}
 
-	// Show the total price of the order
+	// Show theµ total price of the order
 	private JPanel infoContent() {
 		JLabel infoLabel = new JLabel("Info");
 		infoLabel.setFont(new Font("Verdana", Font.BOLD, 20));
 		JPanel infPanel = new JPanel();
 		JPanel infoContentPanel = new JPanel();
-		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
 		infPanel.setLayout(new BoxLayout(infPanel, BoxLayout.Y_AXIS));
 		infPanel.add(infoLabel);
 		infPanel.add(infoContentPanel);
 		infoContentPanel.setLayout(new BoxLayout(infoContentPanel, BoxLayout.Y_AXIS));
 		infoContentPanel.setPreferredSize(new Dimension(200, 200));
-		infoContentPanel.setFont(new Font("Verdana", Font.BOLD, 20));
-		JLabel infoContentPanelLabel = new JLabel("Total price");
-		infoContentPanelLabel.setFont(new Font("Verdana", Font.BOLD, 20));
+		infoContentPanel.setFont(new Font("Verdana", Font.PLAIN, 14));
+		JLabel infoContentPanelLabel = new JLabel("Sub-total");
+		infoContentPanelLabel.setFont(new Font("Verdana", Font.PLAIN, 14));
 		infoContentPanel.add(infoContentPanelLabel);
 		String formattedPrice = String.format("%.2f", order.getTotalPrice());
 		JLabel totalPriceLabel = new JLabel("RM" + formattedPrice);
 		totalPriceLabel.setFont(new Font("Verdana", Font.PLAIN, 12));
 		infoContentPanel.add(totalPriceLabel);
+		// Price after discount
+		JLabel afterDiscountLabel = new JLabel("After discount");
+		afterDiscountLabel.setFont(new Font("Verdana", Font.PLAIN, 14));
+		infoContentPanel.add(afterDiscountLabel);
+		String formattedPriceAfterDiscount = String.format("%.2f", order.getCalculatedPriceAfterDiscount());
+		JLabel afterDiscountPriceLabel = new JLabel("RM" + formattedPriceAfterDiscount);
+		afterDiscountPriceLabel.setFont(new Font("Verdana", Font.PLAIN, 12));
+		infoContentPanel.add(afterDiscountPriceLabel);
 		return infPanel;
+	}
+
+	private JPanel discountContent() {
+		JLabel discountLabel = new JLabel("Discount");
+		discountLabel.setFont(new Font("Verdana", Font.PLAIN, 14));
+		JPanel discountPanel = new JPanel();
+		discountPanel.setLayout(new BoxLayout(discountPanel, BoxLayout.Y_AXIS));
+		discountPanel.add(discountLabel);
+		JComboBox<String> discountDropdown = new JComboBox<String>();
+		discountDropdown.setPreferredSize(new Dimension(50, 30));
+		discountDropdown.setFont(new Font("Verdana", Font.PLAIN, 12));
+		for (TotalDiscount discount : menu.getTotalDiscounts()) {
+			discountDropdown.addItem(discount.getName());
+		}
+		discountPanel.add(discountDropdown);
+		discountDropdown.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					// Find discount with name equal to the selected one
+					TotalDiscount discount = null;
+					for (TotalDiscount d : menu.getTotalDiscounts()) {
+						if (d.getName().equals(discountDropdown.getSelectedItem())) {
+							discount = d;
+						}
+					}
+					order.setDiscount(discount);
+					cartPanel.removeAll();
+					cartPanel = cartContent();
+				} catch (Exception ex) {
+					System.out.println(ex.getMessage());
+				}
+			}
+		});
+		return discountPanel;
+	}
+
+	// set Preferred Size
+	private void setPreferredSize() {
+		this.setPreferredSize(new Dimension(1024, 800));
 	}
 }

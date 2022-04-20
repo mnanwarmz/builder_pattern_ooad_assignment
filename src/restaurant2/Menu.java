@@ -6,6 +6,7 @@ public class Menu {
 	private ArrayList<Food> foods = new ArrayList<Food>();
 	private ArrayList<Drink> drinks = new ArrayList<Drink>();
 	private ArrayList<Bundle> bundles = new ArrayList<Bundle>();
+	private ArrayList<TotalDiscount> totalDiscounts = new ArrayList<TotalDiscount>();
 
 	public Menu() throws Exception {
 		Food pizza = new Food("Pizza", 10.0f);
@@ -23,7 +24,7 @@ public class Menu {
 
 		BundleDiscount ten = new BundleDiscount(0.1f, "10% off");
 		BundleDiscount twenty = new BundleDiscount(0.2f, "20% off");
-		BundleDiscount thirty = new BundleDiscount(0.3f, "30% off");
+		BundleDiscount thirty = new BundleDiscount(1.0f, "30% off");
 
 		bundle1.addFood(burger);
 		bundle1.addFood(pizza);
@@ -52,6 +53,10 @@ public class Menu {
 		bundles.add(bundle1);
 		bundles.add(bundle2);
 		bundles.add(bundle3);
+
+		totalDiscounts.add(new TotalDiscount(0.1f, "10% off"));
+		totalDiscounts.add(new TotalDiscount(0.2f, "20% off"));
+		totalDiscounts.add(new TotalDiscount(0.3f, "30% off"));
 	}
 
 	public ArrayList<Food> getFoods() {
@@ -64,6 +69,10 @@ public class Menu {
 
 	public ArrayList<Bundle> getBundles() {
 		return bundles;
+	}
+
+	public ArrayList<TotalDiscount> getTotalDiscounts() {
+		return totalDiscounts;
 	}
 
 	public void addFood(Food food) {

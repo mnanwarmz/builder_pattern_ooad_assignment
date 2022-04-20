@@ -88,7 +88,7 @@ public class Bundle {
 	 *                   if bundle has discount but no price
 	 */
 	public float getPrice() {
-		return ((price * (1 - discount.getDiscount() / 100)) * quantity);
+		return ((price * (1 - discount.getDiscount())) * quantity);
 	}
 
 	/**
@@ -123,6 +123,14 @@ public class Bundle {
 		return discount;
 	}
 
+	/**
+	 * Set discount of bundle
+	 * 
+	 * @param discount
+	 *                 Discount in decimals e.g. 0.1 for 10%
+	 *
+	 * @return void
+	 */
 	public void addDiscount(BundleDiscount discount) {
 		this.discount = discount;
 	}

@@ -93,6 +93,15 @@ public class Order {
 	}
 
 	/**
+	 * Set order discount
+	 *
+	 * @param discount
+	 */
+	public void setDiscount(TotalDiscount discount) {
+		this.discount = discount;
+	}
+
+	/**
 	 * Get order cart
 	 *
 	 * @return ArrayList<Food>
@@ -157,7 +166,10 @@ public class Order {
 	 */
 	public float getCalculatedPriceAfterDiscount() {
 		// Price after discount
-		float priceAfterDiscount = getTotalPrice() - discount.getDiscount();
+		if (discount == null) {
+			return getTotalPrice();
+		}
+		float priceAfterDiscount = getTotalPrice() * (1 - discount.getDiscount());
 		return priceAfterDiscount;
 	}
 
