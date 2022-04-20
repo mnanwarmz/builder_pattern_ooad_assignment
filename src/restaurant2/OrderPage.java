@@ -108,10 +108,6 @@ public class OrderPage extends JFrame {
 						cartPanel.removeAll();
 						cartPanel = cartContent();
 						rightPanel.add(cartPanel, BorderLayout.CENTER);
-						rightPanel.revalidate();
-						rightPanel.repaint();
-						cartPanel.revalidate();
-						cartPanel.repaint();
 					} catch (Exception ex) {
 						System.out.println(ex.getMessage());
 					}
@@ -142,10 +138,6 @@ public class OrderPage extends JFrame {
 						order.addDrink(drink);
 						cartPanel.removeAll();
 						cartPanel = cartContent();
-						rightPanel.revalidate();
-						rightPanel.repaint();
-						cartPanel.revalidate();
-						cartPanel.repaint();
 					} catch (Exception ex) {
 						System.out.println(ex.getMessage());
 					}
@@ -178,10 +170,6 @@ public class OrderPage extends JFrame {
 						cartPanel.removeAll();
 						cartPanel = cartContent();
 						rightPanel.add(cartPanel);
-						rightPanel.revalidate();
-						rightPanel.repaint();
-						cartPanel.revalidate();
-						cartPanel.repaint();
 					} catch (Exception ex) {
 						System.out.println(ex.getMessage());
 					}
@@ -312,7 +300,7 @@ public class OrderPage extends JFrame {
 		paymentDropdown.addItem("Debit card");
 
 		// Add Pay button
-		JButton payButton = new JButton("Pay");
+		JButton payButton = new JButton("Make Payment");
 		payButton.setFont(new Font("Verdana", Font.PLAIN, 12));
 		payButton.addActionListener(new ActionListener() {
 			@Override
