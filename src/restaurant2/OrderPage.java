@@ -60,8 +60,10 @@ public class OrderPage extends JFrame {
 		footerPanel.add(footer);
 		mainPanel.setLayout(new BorderLayout());
 		mainPanel.add(leftPanel, BorderLayout.WEST);
-		mainPanel.add(rightPanel, BorderLayout.EAST);
+		leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
 		leftPanel.add(itemsPanel);
+		leftPanel.add(paymentContent(this));
+		mainPanel.add(rightPanel, BorderLayout.EAST);
 		rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
 
 		// Items Panel
@@ -77,15 +79,11 @@ public class OrderPage extends JFrame {
 		leftPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		rightPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		itemsPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		foodsPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		drinksPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		bundlesPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		foodButtonsPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		drinksButtonsPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		bundlesButtonsPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		cartPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		footerPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
 	}
 
 	private JPanel foodsContent() {
@@ -290,6 +288,53 @@ public class OrderPage extends JFrame {
 			}
 		});
 		return discountPanel;
+	}
+
+	private JPanel paymentContent(JFrame frame) {
+		JLabel paymentLabel = new JLabel("Payment");
+		paymentLabel.setFont(new Font("Verdana", Font.BOLD, 20));
+		JPanel paymentPanel = new JPanel();
+		paymentPanel.setLayout(new BoxLayout(paymentPanel, BoxLayout.Y_AXIS));
+		paymentPanel.add(paymentLabel);
+		JPanel paymentContentPanel = new JPanel();
+		paymentPanel.add(paymentContentPanel);
+		paymentContentPanel.setLayout(new BoxLayout(paymentContentPanel, BoxLayout.Y_AXIS));
+		paymentContentPanel.setPreferredSize(new Dimension(200, 200));
+		paymentContentPanel.setFont(new Font("Verdana", Font.PLAIN, 14));
+		JLabel paymentContentPanelLabel = new JLabel("Payment method");
+		paymentContentPanelLabel.setFont(new Font("Verdana", Font.PLAIN, 14));
+		paymentContentPanel.add(paymentContentPanelLabel);
+		JComboBox<String> paymentDropdown = new JComboBox<String>();
+		paymentDropdown.setPreferredSize(new Dimension(50, 30));
+		paymentDropdown.setFont(new Font("Verdana", Font.PLAIN, 12));
+		paymentDropdown.addItem("Cash");
+		paymentDropdown.addItem("Credit card");
+		paymentDropdown.addItem("Debit card");
+
+		// Add Pay button
+		JButton payButton = new JButton("Pay");
+		payButton.setFont(new Font("Verdana", Font.PLAIN, 12));
+		payButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// Open a new JFrame and close current JFrame stating the order is paid
+				JFrame payFrame = new JFrame("Payment");
+				payFrame.setSize(300, 200);
+				payFrame.setLocationRelativeTo(null);
+				payFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				payFrame.setVisible(true);
+				JLabel payLabel = new JLabel("Payment has been made");
+				payLabel.setFont(new Font("Verdana", Font.PLAIN, 16));
+				// center text
+				payLabel.setHorizontalAlignment(JLabel.CENTER);
+				payFrame.add(payLabel);
+				// Close current JFrame
+				frame.dispose();
+			}
+		});
+		paymentContentPanel.add(paymentDropdown);
+		paymentContentPanel.add(payButton);
+		return paymentPanel;
 	}
 
 	// set Preferred Size
