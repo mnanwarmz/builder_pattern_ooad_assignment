@@ -21,7 +21,15 @@ public class Order {
 	 * @throws Exception
 	 *                   if food is already in order cart
 	 */
+
 	public void addFood(Food food) {
+		// if already exists increment quantity
+		for (Food f : foods) {
+			if (f.getName().equals(food.getName())) {
+				f.setQuantity(f.getQuantity() + 1);
+				return;
+			}
+		}
 		foods.add(food);
 	}
 
@@ -29,11 +37,15 @@ public class Order {
 	 * Add bundle to order cart
 	 *
 	 * @param bundle
-	 * @return void
-	 * @throws Exception
-	 *                   if bundle is already in order cart
 	 */
 	public void addBundle(Bundle bundle) {
+		// if already exists increment quantity
+		for (Bundle b : bundles) {
+			if (b.getName().equals(bundle.getName())) {
+				b.setQuantity(b.getQuantity() + 1);
+				return;
+			}
+		}
 		bundles.add(bundle);
 	}
 
@@ -45,16 +57,17 @@ public class Order {
 	 * Add drink to order cart
 	 *
 	 * @param drink
-	 * @return void
-	 * @throws Exception
-	 *                   if drink is already in order cart
 	 */
-	public void addDrink(Drink drink) throws Exception {
-		if (drinks.contains(drink)) {
-			throw new Exception("Drink already in order cart");
-		} else {
-			drinks.add(drink);
+	public void addDrink(Drink drink) {
+		// if already exists increment quantity
+		for (Drink d : drinks) {
+			if (d.getName().equals(drink.getName())) {
+				d.setQuantity(d.getQuantity() + 1);
+				return;
+			}
 		}
+		drinks.add(drink);
+
 	}
 
 	/**
@@ -111,9 +124,7 @@ public class Order {
 	 *                   if order is empty
 	 */
 	public ArrayList<Drink> getDrinks() {
-
 		return drinks;
-
 	}
 
 	/**
@@ -124,9 +135,17 @@ public class Order {
 	 *                   if order is empty
 	 */
 	public float getTotalPrice() {
-
-		return price;
-
+		float totalPrice = 0;
+		for (Food food : foods) {
+			totalPrice += food.getPrice();
+		}
+		for (Bundle bundle : bundles) {
+			totalPrice += bundle.getPrice();
+		}
+		for (Drink drink : drinks) {
+			totalPrice += drink.getPrice();
+		}
+		return totalPrice;
 	}
 
 	/**
@@ -136,9 +155,9 @@ public class Order {
 	 * @throws Exception
 	 *                   if order is empty
 	 */
-	public float getCalculatedPrice() {
+	public float getCalculatedPriceAfterDiscount() {
 		// Price after discount
-		float priceAfterDiscount = price - discount.getDiscount();
+		float priceAfterDiscount = getTotalPrice() - discount.getDiscount();
 		return priceAfterDiscount;
 	}
 

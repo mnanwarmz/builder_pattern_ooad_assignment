@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Bundle {
 	private String name;
 	private float price;
-	private int quantity;
+	private int quantity = 1;
 	private BundleDiscount discount;
 	private ArrayList<Food> foods;
 	private ArrayList<Drink> drinks;
@@ -36,12 +36,15 @@ public class Bundle {
 	 *                   if food is already in bundle
 	 *                   if bundle is already full
 	 */
-	public void addFood(Food food) throws Exception {
-		if (foods.contains(food)) {
-			throw new Exception("Food already in bundle");
-		} else {
-			foods.add(food);
+	public void addFood(Food food) {
+		// if already exists increment quantity
+		for (Food f : foods) {
+			if (f.getName().equals(food.getName())) {
+				f.setQuantity(f.getQuantity() + 1);
+				return;
+			}
 		}
+		foods.add(food);
 	}
 
 	/**
@@ -54,14 +57,15 @@ public class Bundle {
 	 *                   if bundle is already full
 	 *                   if drink is not a drink
 	 */
-	public void addDrink(Drink drink) throws Exception {
-		if (drinks.contains(drink)) {
-			throw new Exception("Drink already in bundle");
-		} else if (!(drink instanceof Drink)) {
-			throw new Exception("Drink is not a drink");
-		} else {
-			drinks.add(drink);
+	public void addDrink(Drink drink) {
+		// if already exists increment quantity
+		for (Drink d : drinks) {
+			if (d.getName().equals(drink.getName())) {
+				d.setQuantity(d.getQuantity() + 1);
+				return;
+			}
 		}
+		drinks.add(drink);
 	}
 
 	/**
@@ -84,8 +88,7 @@ public class Bundle {
 	 *                   if bundle has discount but no price
 	 */
 	public float getPrice() {
-		return (price * (1 - discount.getDiscount() / 100));
-
+		return ((price * (1 - discount.getDiscount() / 100)) * quantity);
 	}
 
 	/**
@@ -95,6 +98,10 @@ public class Bundle {
 	 */
 	public int getQuantity() {
 		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	/**
@@ -118,5 +125,12 @@ public class Bundle {
 
 	public void addDiscount(BundleDiscount discount) {
 		this.discount = discount;
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		String formattedPrice = String.format("%.2f", getPrice());
+		return name + " RM" + formattedPrice + " x " + quantity + " ";
 	}
 }

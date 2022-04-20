@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 abstract class Item {
 	protected String name;
 	protected float price;
-	protected int quantity;
+	protected int quantity = 1;
 	protected ItemDiscount discount;
 	protected JLabel nameLabel;
 
@@ -20,9 +20,9 @@ abstract class Item {
 
 	public float getPrice() {
 		if (discount != null)
-			return price - discount.getDiscount();
+			return (price - discount.getDiscount()) * quantity;
 		else
-			return price;
+			return price * quantity;
 	}
 
 	public String getName() {
@@ -43,5 +43,12 @@ abstract class Item {
 
 	public void addDiscount(ItemDiscount discount) {
 		this.discount = discount;
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		String formattedPrice = String.format("%.2f", getPrice());
+		return name + " RM" + formattedPrice + " x " + quantity + " ";
 	}
 }
